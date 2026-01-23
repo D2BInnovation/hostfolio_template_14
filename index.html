@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - <span data-dynamic="name">Loading...</span></title>
+    <meta name="description" content="Portfolio of <span data-dynamic="title">Loading...</span>">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-text">
+                <span class="loading-char">L</span>
+                <span class="loading-char">o</span>
+                <span class="loading-char">a</span>
+                <span class="loading-char">d</span>
+                <span class="loading-char">i</span>
+                <span class="loading-char">n</span>
+                <span class="loading-char">g</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (Dynamic) -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#hero" class="logo-link">
+                    <span class="logo-text" data-dynamic="name">Portfolio</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <!-- Navigation items will be dynamically inserted here -->
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section (Dynamic) -->
+        <section id="hero" class="hero-section section-hidden">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-greeting">
+                        <h1 class="greeting-text">
+                            <span class="greeting-word" data-split-text>Hi, I'm</span>
+                        </h1>
+                        <h2 class="hero-name" data-dynamic="name" data-split-text>Loading...</h2>
+                        <h3 class="hero-title" data-dynamic="title" data-split-text>Loading...</h3>
+                    </div>
+                    <p class="hero-description" data-dynamic="description" data-split-text>Loading description...</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary" data-dynamic="primaryButton">
+                            <span class="btn-text">View My Work</span>
+                            <i class="fas fa-arrow-right btn-icon"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary" data-dynamic="secondaryButton">
+                            <span class="btn-text">Get In Touch</span>
+                            <i class="fas fa-envelope btn-icon"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-bg-shapes">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                        <div class="shape shape-3"></div>
+                    </div>
+                    <div class="hero-image-container">
+                        <div class="hero-image-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+                <span class="scroll-text">Scroll to explore</span>
+            </div>
+        </section>
+
+        <!-- About Section (Dynamic) -->
+        <section id="about" class="about-section section-hidden">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-split-text>About Me</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <div class="about-description" data-dynamic="description">
+                            <!-- Description paragraphs will be dynamically inserted here -->
+                        </div>
+                        <div class="about-skills">
+                            <h3 class="skills-title" data-split-text>Skills & Technologies</h3>
+                            <div class="skills-grid" data-dynamic="skills">
+                                <!-- Skills will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-visual">
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="5">0</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="50">0</div>
+                                <div class="stat-label">Projects Completed</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="100">0</div>
+                                <div class="stat-label">Happy Clients</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section (Dynamic) -->
+        <section id="experience" class="experience-section section-hidden">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-split-text>Experience</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="experience-timeline" data-dynamic="experience">
+                    <!-- Experience items will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (Dynamic) -->
+        <section id="projects" class="projects-section section-hidden">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-split-text>Featured Projects</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="projects-grid" data-dynamic="projects">
+                    <!-- Project cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section (Dynamic) -->
+        <section id="contact" class="contact-section section-hidden">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-split-text>Get In Touch</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3 class="contact-title" data-dynamic="title">Let's Work Together</h3>
+                        <p class="contact-description" data-dynamic="description">
+                            I'm always interested in new opportunities and exciting projects.
+                        </p>
+                        <div class="contact-social" data-dynamic="socialLinks">
+                            <!-- Social links will be dynamically inserted here -->
+                        </div>
+                    </div>
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" required>
+                                <label for="name">Your Name</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Your Email</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <label for="message">Your Message</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="btn-text">Send Message</span>
+                                <i class="fas fa-paper-plane btn-icon"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Dynamic) -->
+    <footer id="footer" class="footer section-hidden">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-text">
+                        © <span id="current-year">2024</span> <span data-dynamic="name">Portfolio</span>. 
+                        All rights reserved.
+                    </p>
+                </div>
+                <div class="footer-social" data-dynamic="socialLinks">
+                    <!-- Social links will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data-loader.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

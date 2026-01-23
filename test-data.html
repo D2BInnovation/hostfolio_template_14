@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Test</title>
+</head>
+<body>
+    <h1>Testing Data Loading</h1>
+    <div id="output"></div>
+    
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data loaded:', data);
+                const output = document.getElementById('output');
+                output.innerHTML = `
+                    <h2>Data Loaded Successfully!</h2>
+                    <p>Personal: ${data.personal.name}</p>
+                    <p>Projects count: ${data.projects.length}</p>
+                    <h3>Projects:</h3>
+                    <ul>
+                        ${data.projects.map(p => `<li>${p.title}</li>`).join('')}
+                    </ul>
+                `;
+            })
+            .catch(error => {
+                console.error('Error loading data:', error);
+                document.getElementById('output').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            });
+    </script>
+</body>
+</html>
