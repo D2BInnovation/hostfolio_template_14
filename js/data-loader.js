@@ -19,10 +19,10 @@ class DataLoader {
             this.renderSections();
             this.setupDynamicContent();
             this.loaded = true;
-            
+
             // Emit custom event when data is loaded
-            document.dispatchEvent(new CustomEvent('dataLoaded', { 
-                detail: { data: this.data } 
+            document.dispatchEvent(new CustomEvent('dataLoaded', {
+                detail: { data: this.data }
             }));
         } catch (error) {
             console.error('Error in DataLoader initialization:', error);
@@ -131,16 +131,16 @@ class DataLoader {
         // Update hero content
         if (hero) {
             this.updateDynamicContent('[data-dynamic="description"]', hero.description);
-            
+
             // Update buttons
             const primaryBtn = document.querySelector('.hero-buttons .btn-primary');
             const secondaryBtn = document.querySelector('.hero-buttons .btn-secondary');
-            
+
             if (hero.primaryButton && primaryBtn) {
                 primaryBtn.href = hero.primaryButton.link;
                 primaryBtn.querySelector('.btn-text').textContent = hero.primaryButton.text;
             }
-            
+
             if (hero.secondaryButton && secondaryBtn) {
                 secondaryBtn.href = hero.secondaryButton.link;
                 secondaryBtn.querySelector('.btn-text').textContent = hero.secondaryButton.text;
@@ -197,15 +197,15 @@ class DataLoader {
                     <p class="experience-description">${exp.description}</p>
                     ${exp.achievements ? `
                         <ul class="experience-achievements">
-                            ${exp.achievements.map(achievement => 
-                                `<li>${achievement}</li>`
-                            ).join('')}
+                            ${exp.achievements.map(achievement =>
+            `<li>${achievement}</li>`
+        ).join('')}
                         </ul>
                     ` : ''}
                     <div class="experience-tech">
-                        ${exp.technologies.map(tech => 
-                            `<span class="tech-tag">${tech}</span>`
-                        ).join('')}
+                        ${exp.technologies.map(tech =>
+            `<span class="tech-tag">${tech}</span>`
+        ).join('')}
                     </div>
                 </div>
                 <div class="experience-date">${exp.duration}</div>
@@ -223,9 +223,9 @@ class DataLoader {
         const projectCards = this.data.projects
             .map(project => this.createProjectCard(project))
             .join('');
-            
+
         projectsGrid.innerHTML = projectCards;
-        
+
         // Force the projects section to be visible
         const projectsSection = document.getElementById('projects');
         if (projectsSection) {
@@ -275,7 +275,7 @@ class DataLoader {
     renderFooter() {
         const personal = this.data.personal;
         const currentYear = new Date().getFullYear();
-        
+
         // Update year
         const yearElement = document.getElementById('current-year');
         if (yearElement) yearElement.textContent = currentYear;
@@ -302,7 +302,7 @@ class DataLoader {
         };
 
         const iconClass = iconMap[link.icon.toLowerCase()] || 'fas fa-link';
-        
+
         return `
             <a href="${link.url}" target="_blank" class="social-link" aria-label="${link.platform}">
                 <i class="${iconClass}"></i>
@@ -328,6 +328,17 @@ class DataLoader {
                 </a>
             `)
             .join('');
+
+        const resumeUrl = this.data.resume || (this.data.personal ? this.data.personal.resume : null);
+        if (resumeUrl) {
+            const resumeLink = document.createElement('a');
+            resumeLink.href = resumeUrl;
+            resumeLink.target = '_blank';
+            resumeLink.rel = 'noopener noreferrer';
+            resumeLink.className = 'nav-link resume-link';
+            resumeLink.innerHTML = `<i class="fas fa-file-pdf"></i> Resume`;
+            navMenu.appendChild(resumeLink);
+        }
     }
 
     formatNavName(sectionId) {
@@ -346,7 +357,7 @@ class DataLoader {
         const personal = this.data.personal;
         if (personal) {
             document.title = `${personal.name} - ${personal.title}`;
-            
+
             // Update meta description
             const metaDescription = document.querySelector('meta[name="description"]');
             if (metaDescription) {
