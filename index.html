@@ -20,6 +20,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script id="hostfolio-native-fixes">
         (function () {
+             // Check for file protocol (CORS issue)
+            if (window.location.protocol === 'file:') {
+                 window.addEventListener('DOMContentLoaded', function() {
+                    const loadingTextContainer = document.querySelector('.loading-text');
+                    if (loadingTextContainer) {
+                        loadingTextContainer.innerHTML = '<div style="color:#ff4d4d;font-family:sans-serif;font-size:1.2rem;line-height:1.5;">⚠️ CORS Error<br><small style="color:rgba(255,255,255,0.7)">Opening this file directly via <b>file://</b> is blocked by browser security.<br>Please run <b>npm run dev</b> to view the template.</small></div>';
+                        loadingTextContainer.style.display = 'block';
+                    }
+                    const loadingBar = document.querySelector('.loading-bar');
+                    if (loadingBar) loadingBar.style.display = 'none';
+                });
+            }
+
             async function updateTitle() {
                 try {
                     const response = await fetch('./data.json');

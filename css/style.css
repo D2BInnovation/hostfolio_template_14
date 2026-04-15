@@ -279,8 +279,7 @@ body {
 
 /* ===== SECTIONS ===== */
 .section-hidden {
-  opacity: 0;
-  visibility: hidden;
+  display: none !important;
 }
 
 .container {

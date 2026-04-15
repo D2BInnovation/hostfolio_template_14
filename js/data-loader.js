@@ -53,19 +53,24 @@ class DataLoader {
 
         // Check for each section
         if (this.hasValidData(this.data.about)) {
-            this.sections.push('about');
+            const hasAboutContent = (this.data.about.description && this.data.about.description.length > 0) || 
+                                   (this.data.about.skills && this.data.about.skills.length > 0);
+            if (hasAboutContent) this.sections.push('about');
         }
 
-        if (this.hasValidData(this.data.experience) && this.data.experience.length > 0) {
+        if (this.hasValidData(this.data.experience) && Array.isArray(this.data.experience) && this.data.experience.length > 0) {
             this.sections.push('experience');
         }
 
-        if (this.hasValidData(this.data.projects) && this.data.projects.length > 0) {
+        if (this.hasValidData(this.data.projects) && Array.isArray(this.data.projects) && this.data.projects.length > 0) {
             this.sections.push('projects');
         }
 
         if (this.hasValidData(this.data.contact)) {
-            this.sections.push('contact');
+            const hasContactContent = this.data.contact.title || 
+                                     this.data.contact.description || 
+                                     (this.data.contact.socialLinks && this.data.contact.socialLinks.length > 0);
+            if (hasContactContent) this.sections.push('contact');
         }
 
         // Always include footer if personal data exists
@@ -75,7 +80,10 @@ class DataLoader {
     }
 
     hasValidData(data) {
-        return data !== null && data !== undefined && data !== '';
+        if (data === null || data === undefined || data === '') return false;
+        if (Array.isArray(data)) return data.length > 0;
+        if (typeof data === 'object') return Object.keys(data).length > 0;
+        return true;
     }
 
     renderSections() {
@@ -121,30 +129,34 @@ class DataLoader {
     }
 
     renderHeroSection() {
-        const personal = this.data.personal;
-        const hero = this.data.hero;
+        const personal = this.data.personal || {};
+        const hero = this.data.hero || {};
 
         // Update personal info
-        this.updateDynamicContent('[data-dynamic="name"]', personal.name);
-        this.updateDynamicContent('[data-dynamic="title"]', personal.title);
+        this.updateDynamicContent('[data-dynamic="name"]', personal.name || '');
+        this.updateDynamicContent('[data-dynamic="title"]', personal.title || '');
 
         // Update hero content
-        if (hero) {
-            this.updateDynamicContent('[data-dynamic="description"]', hero.description);
+        this.updateDynamicContent('[data-dynamic="description"]', hero.description || '');
 
-            // Update buttons
-            const primaryBtn = document.querySelector('.hero-buttons .btn-primary');
-            const secondaryBtn = document.querySelector('.hero-buttons .btn-secondary');
+        // Update buttons
+        const primaryBtn = document.querySelector('.hero-buttons .btn-primary');
+        const secondaryBtn = document.querySelector('.hero-buttons .btn-secondary');
 
-            if (hero.primaryButton && primaryBtn) {
-                primaryBtn.href = hero.primaryButton.link;
-                primaryBtn.querySelector('.btn-text').textContent = hero.primaryButton.text;
-            }
+        if (hero.primaryButton && primaryBtn) {
+            primaryBtn.href = hero.primaryButton.link;
+            primaryBtn.querySelector('.btn-text').textContent = hero.primaryButton.text;
+            primaryBtn.style.display = 'inline-flex';
+        } else if (primaryBtn) {
+            primaryBtn.style.display = 'none';
+        }
 
-            if (hero.secondaryButton && secondaryBtn) {
-                secondaryBtn.href = hero.secondaryButton.link;
-                secondaryBtn.querySelector('.btn-text').textContent = hero.secondaryButton.text;
-            }
+        if (hero.secondaryButton && secondaryBtn) {
+            secondaryBtn.href = hero.secondaryButton.link;
+            secondaryBtn.querySelector('.btn-text').textContent = hero.secondaryButton.text;
+            secondaryBtn.style.display = 'inline-flex';
+        } else if (secondaryBtn) {
+            secondaryBtn.style.display = 'none';
         }
     }
 
